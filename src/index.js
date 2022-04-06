@@ -1,7 +1,7 @@
-const express = require("express");
-const mongoose = require("mongoose");
+import express from "express";
+import mongoose from "mongoose";
 const app = express();
-const routes = require("./routes");
+import routes from "./routes";
 mongoose
   .connect("mongodb://localhost:27017/acmedb", { useNewUrlParser: true })
   .then(() => {

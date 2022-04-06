@@ -1,5 +1,5 @@
-const express = require("express");
-const Post = require("./models/Post");
+import express from "express";
+import Post from "./models/Post";
 const router = express.Router();
 router.get("/posts", async (req, res) => {
   const posts = await Post.find();
@@ -50,4 +50,4 @@ router.delete("/posts/:id", async (req, res) => {
     res.send({ error: "Post doesn't exist!" });
   }
 });
-module.exports = router;
+export default router;
