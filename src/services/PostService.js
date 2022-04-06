@@ -1,5 +1,7 @@
 import Post from "../models/Post";
 export default class PostService {
+  //get single blog
+
   static async getSingle(id) {
     try {
       const post = await Post.findOne({ _id: id });
@@ -9,6 +11,9 @@ export default class PostService {
       return { error: "Post not found" };
     }
   }
+
+  // return all blogs
+
   static async getAll() {
     try {
       const posts = await Post.find();
@@ -18,6 +23,8 @@ export default class PostService {
       return { posts: null, error: error.message };
     }
   }
+
+  //Update a post
 
   static async updatePost(id, { title, content }) {
     try {
@@ -37,6 +44,8 @@ export default class PostService {
     }
   }
 
+  //delete a post
+
   static async deletePost(id) {
     try {
       const post = await Post.deleteOne({ _id: id });
@@ -46,6 +55,8 @@ export default class PostService {
       return { post: null, error: "Post doesn't exists" };
     }
   }
+
+  //create a post
 
   static async createPost({ title, content }) {
     try {
