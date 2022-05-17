@@ -1,9 +1,13 @@
 import express from "express";
-import PostController from "../controller/PostController";
+
+import UserController from "../controller/UserController";
+import PostController from "../controller/UserController";
+import isLoggedIn from "../middlewares/isLoggedIn";
+
 const router = express.Router();
-router.get("/posts", PostController.allPost);
-router.post("/posts", PostController.create);
-router.get("/posts/:id", PostController.singlePost);
-router.patch("/posts/:id", PostController.update);
-router.delete("/posts/:id", PostController.delete);
+router.post("/auth/signup", UserController.signup);
+router.post("/auth/signin", PostController.signin);
+router.get("/profile", isLoggedIn, PostController.getUser);
+router.patch("/profile", isLoggedIn, PostController.updateUser);
+
 export default router;

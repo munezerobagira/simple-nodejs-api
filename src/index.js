@@ -1,27 +1,26 @@
-import express from "express";
-import mongoose from "mongoose";
-import routes from "./routes";
-
-//Environment variables
 import dotenv from "dotenv";
 dotenv.config();
 
+import express from "express";
+import routes from "./routes";
+import { sequelize } from "./models";
+
+//Environment variables
+
 // App
 const app = express();
-const port = process.env.PORT || 5000;
-const mongoUrl = process.env.MONGO_URL;
-
-// database
-
-mongoose.connect(mongoUrl, { useNewUrlParser: true }).then(() => {
-  console.log("Database connected");
-});
+const { PORT = 5000 } = process.env;
 
 // middleware
 app.use(express.json());
 
 // routes
 app.use("/api", routes);
-app.listen(port, () => {
-  console.log("Server has started!");
+app.use("*", (request, response) => {
+  response.status(501).json({ message: "Uhhh this is not implemented" });
+});
+app.listen(PORT, async () => {
+  console.log("Server has started on", PORT);
+  await sequelize.authenticate();
+  console.log("connected to the db");
 });
