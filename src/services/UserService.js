@@ -1,8 +1,11 @@
-import { User } from "../models/";
-export default class UserService {
-  //get single blog
+import { User } from '../database/models';
 
-  static async createuser({ email, password, name, age, address }) {
+export default class UserService {
+  // get single blog
+
+  static async createuser({
+    email, password, name, age, address,
+  }) {
     const user = await User.create({
       email,
       password,
@@ -10,21 +13,28 @@ export default class UserService {
       age,
       address,
     });
-    if (!user) return { error: "User not found" };
+    if (!user) return { error: 'User not found' };
     return { user };
   }
-  static async getUser({ name, uuid, age, email }) {
-    const user = await User.findOne({ uuid, name, age, email });
-    if (!user) return { error: "User not found" };
+
+  static async getUser({
+    name, uuid, age, email,
+  }) {
+    const user = await User.findOne({
+      uuid, name, age, email,
+    });
+    if (!user) return { error: 'User not found' };
     return { user };
   }
 
   // return all blogs
 
-  static async updateUser(uuid, { email, password, name, age, address }) {
+  static async updateUser(uuid, {
+    email, password, name, age, address,
+  }) {
     try {
       const user = await User.findOne({ uuid });
-      if (!user) return { error: "User not found" };
+      if (!user) return { error: 'User not found' };
       if (email) user.email = email;
       if (password) user.password = password;
       if (age) user.age = age;
