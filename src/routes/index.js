@@ -1,13 +1,12 @@
-import express from "express";
+import express from 'express';
 
-import UserController from "../controller/UserController";
-import PostController from "../controller/UserController";
-import isLoggedIn from "../middlewares/isLoggedIn";
+import UserController from '../controllers/UserController';
+import isLoggedIn from '../middlewares/isLoggedIn';
 
 const router = express.Router();
-router.post("/auth/signup", UserController.signup);
-router.post("/auth/signin", PostController.signin);
-router.get("/profile", isLoggedIn, PostController.getUser);
-router.patch("/profile", isLoggedIn, PostController.updateUser);
+router.post('/auth/signup', UserController.signup);
+router.post('/auth/signin', UserController.signin);
+router.get('/profile', isLoggedIn, UserController.getUser);
+router.patch('/profile', isLoggedIn, UserController.updateUser);
 
 export default router;

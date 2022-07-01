@@ -1,6 +1,6 @@
-"use strict";
-const { Model } = require("sequelize");
-const { hashSync } = require("bcrypt");
+const { Model } = require('sequelize');
+const { hashSync } = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+
     toJSON() {
       return { ...this.get(), id: undefined };
     }
@@ -27,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         async set(value) {
-          this.setDataValue("password", hashSync(value, 10));
+          this.setDataValue('password', hashSync(value, 10));
         },
       },
       email: { type: DataTypes.STRING, unique: true, allowNull: false },
@@ -35,9 +36,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "User",
-      tableName: "users",
-    }
+      modelName: 'User',
+      tableName: 'users',
+    },
   );
   return User;
 };
