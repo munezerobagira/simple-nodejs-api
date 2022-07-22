@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv';
-
 import express from 'express';
-import routes from './routes';
+
 import { sequelize } from './database/models';
+import routes from './routes';
 
 dotenv.config();
 

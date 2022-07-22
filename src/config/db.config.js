@@ -1,17 +1,11 @@
 require('dotenv/config');
 
+const { DB_DIALECT = 'postgres' } = process.env;
+const { NODE_ENV = 'development' } = process.env;
 const config = {
-  development: {
-    url: process.env.DEV_DB_URL,
-    dialect: 'postgres',
-  },
-  test: {
-    url: process.env.TEST_DB_URL,
-    dialect: 'postgres',
-  },
-  production: {
-    url: process.env.DB_URL,
-    dialect: 'postgres',
+  [NODE_ENV]: {
+    url: process.env[`${NODE_ENV.toUpperCase()}_DATABASE_URL`],
+    dialect: DB_DIALECT,
   },
 };
 module.exports = config;

@@ -4,12 +4,13 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node dist/index.js",
-    "dev": "nodemon  --exec babel-node src/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon  --exec babel-node src/index.js",
     "build": "babel src --out-dir dist",
     "migrate": "npx sequelize-cli db:migrate",
     "seed": "npx sequelize-cli db:seed:all",
-    "undo-seed": "npx sequelize-cli db:seed:undo",
-    "undo-migration": "npx sequelize-cli db:migrate:undo",
+    "unseed": "npx sequelize-cli db:seed:undo",
+    "unmigrate": "npx sequelize-cli db:migrate:undo",
+    "unmigrate:all": "npx sequelize-cli db:migrate:undo:alll",
     "prepare": "husky install",
     "test": "jest tests/",
     "lint": "eslint --ext .js src"
@@ -19,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jest": "^28.1.2",
@@ -42,7 +44,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-security": "^1.5.0",
     "husky": "^8.0.1",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.19",
     "prettier": "^2.0.5"
   },
   "description": "Simple api made with NodeJS and Sequelize"
